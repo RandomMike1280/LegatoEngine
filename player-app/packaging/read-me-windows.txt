@@ -1,0 +1,32 @@
+AutoPiano Player for Windows (64-bit Windows 10 or 11)
+=======================================================
+
+Plays AutoPiano scripts (.apno files) on Roblox pianos by pressing the keys for you.
+It only plays scripts; turning songs into scripts needs the full AutoPiano app.
+
+Installing
+1. Unzip this folder somewhere you'll keep it, such as Documents.
+2. Double-click "AutoPiano Player.exe".
+   If Windows says "Windows protected your PC", click "More info", then "Run anyway".
+   (The exe isn't signed, so Windows asks once.) Some antivirus apps are wary of
+   programs that press keys; allow it if you trust where you got it.
+
+Your scripts
+Put .apno files in Music\AutoPiano (folders inside it are fine; "Show folder" opens it),
+choose another folder with "Change folder...", or drop a script on the window.
+
+Playing
+1. In Roblox, sit at a piano.
+2. In the player, pick a script and press Play: it brings Roblox to the front and counts
+   down. Or, with Roblox in front, press F6 to start or pause and F7 to stop.
+   You can choose other hotkeys.
+3. Click the piano roll to start partway through a song.
+
+Options
+- Speed: slower makes fast songs easier for the game to keep up with.
+- Keyboard-possible mode: plays only chords a real keyboard can press at once
+  (no capital and lowercase keys together, no Ctrl keys with normal ones).
+- Test mode: runs through the song without pressing anything.
+
+If keys don't reach Roblox: click inside the Roblox window once so it has the keyboard,
+and if you run Roblox as administrator, run the player as administrator too.

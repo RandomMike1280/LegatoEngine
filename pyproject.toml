@@ -1,0 +1,70 @@
+[project]
+name = "autopiano"
+version = "0.1.0"
+description = "Turn any song into a custom script and play it on Roblox pianos"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy",
+    "scipy",
+    "librosa>=0.10",
+    "soundfile",
+    "mido",
+    "msgpack",
+    "cryptography",
+    "PySide6",
+    "sounddevice",
+    "pyobjc-framework-Quartz ; sys_platform == 'darwin'",
+    "pyobjc-framework-ApplicationServices ; sys_platform == 'darwin'",
+    "pyobjc-framework-Cocoa ; sys_platform == 'darwin'",
+    "torch",
+    "torchaudio",
+    "yt-dlp[default]>=2026.10.21",
+    "transkun>=2.0.1",
+    "einops>=0.8.2",
+    "beartype>=0.23.1",
+    "rotary-embedding-torch>=0.9.1",
+    "packaging>=26.3",
+    "mlx>=0.32.4 ; platform_machine == 'arm64' and sys_platform == 'darwin'",
+    "swift-f0>=0.3.0",
+    "muscriptor==0.4.0",
+]
+
+[project.scripts]
+autopiano = "autopiano.gui.app:main"
+autopiano-cli = "autopiano.cli:run"
+
+[dependency-groups]
+dev = ["pytest", "pyinstaller"]
+
+[tool.uv]
+# Apple Silicon Macs run everything. Windows runs the command-line converter: the window and the
+# player send keys through macOS Quartz (AutoPiano Player in player-app/ plays on Windows).
+environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
+required-environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
+
+[tool.uv.sources]
+# PyPI's torch for Windows runs on the CPU only; PyTorch's own index has it built for NVIDIA GPUs
+torch = [{ index = "pytorch-cuda", marker = "sys_platform == 'win32'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu132"
+explicit = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/autopiano"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: needs the ML models (deselect with -m 'not slow')"]

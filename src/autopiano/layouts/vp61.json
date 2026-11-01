@@ -1,0 +1,8 @@
+{
+  "id": "vp61",
+  "name": "61 keys (standard)",
+  "description": "The Virtual Piano layout most Roblox pianos use, C2 to C7. Black keys are Shift plus the white key just below.",
+  "low": 36,
+  "white_keys": "1234567890qwertyuiopasdfghjklzxcvbnm",
+  "extra": []
+}

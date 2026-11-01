@@ -1,0 +1,33 @@
+AutoPiano Player for Mac (Apple Silicon and Intel, macOS 10.15 or later)
+=========================================================================
+
+Plays AutoPiano scripts (.apno files) on Roblox pianos by pressing the keys for you.
+It only plays scripts; turning songs into scripts needs the full AutoPiano app.
+
+Installing
+1. Drag "AutoPiano Player" into your Applications folder.
+2. Open it. If macOS says it can't check the app for malicious software, open
+   System Settings > Privacy & Security, scroll down, and click "Open Anyway".
+   (The app isn't notarized by Apple, so macOS asks once.)
+
+Letting it press keys
+The first time you press Play, macOS asks you to allow AutoPiano Player in
+System Settings > Privacy & Security > Accessibility. Turn it on, then press Play again.
+If an older copy was in that list, remove it with the minus button and add this one.
+
+Your scripts
+Put .apno files in Music > AutoPiano (folders inside it are fine; "Show folder" opens it),
+choose another folder with "Change folder...", or drop a script on the window.
+
+Playing
+1. In Roblox, sit at a piano.
+2. In the player, pick a script and press Play: it brings Roblox to the front and counts
+   down. Or, with Roblox in front, press F6 to start or pause and F7 to stop.
+   On a MacBook keyboard, hold fn with the F-key. You can choose other hotkeys.
+3. Click the piano roll to start partway through a song.
+
+Options
+- Speed: slower makes fast songs easier for the game to keep up with.
+- Keyboard-possible mode: plays only chords a real keyboard can press at once
+  (no capital and lowercase keys together, no Ctrl keys with normal ones).
+- Test mode: runs through the song without pressing anything.

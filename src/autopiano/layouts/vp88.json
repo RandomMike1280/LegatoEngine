@@ -1,0 +1,11 @@
+{
+  "id": "vp88",
+  "name": "88 keys (Ctrl for extra keys)",
+  "description": "The 61-key layout plus the 27 extra keys of a full piano, played with Ctrl: Ctrl+1..T is A0 to B1, Ctrl+Y..J is C#7 to C8. Games differ, so check this in yours.",
+  "low": 36,
+  "white_keys": "1234567890qwertyuiopasdfghjklzxcvbnm",
+  "extra": [
+    {"first_pitch": 21, "keys": "1234567890qwert", "modifier": "ctrl"},
+    {"first_pitch": 97, "keys": "yuiopasdfghj", "modifier": "ctrl"}
+  ]
+}
