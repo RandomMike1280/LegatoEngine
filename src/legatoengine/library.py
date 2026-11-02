@@ -1,4 +1,4 @@
-"""The script library: every .apno under ~/Music/AutoPiano, and finding scripts in it.
+"""The script library: every .apno under ~/Music/LegatoEngine, and finding scripts in it.
 
 Searching forgives what people get wrong when they type a song's name: case, accents
 ("fur elise" finds "Für Elise"), punctuation, spacing ("bwv846" finds "BWV 846") and

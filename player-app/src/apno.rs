@@ -1,8 +1,8 @@
-//! Reads .apno scripts, the encrypted format the AutoPiano converter writes.
+//! Reads .apno scripts, the encrypted format the LegatoEngine converter writes.
 //!
 //! A file is a 40-byte header followed by AES-256-GCM(zlib(msgpack(payload))). The header
 //! is authenticated too, so a changed byte anywhere makes the file unreadable rather than
-//! silently wrong. See `src/autopiano/format/apno.py` in the converter for the writer.
+//! silently wrong. See `src/legatoengine/format/apno.py` in the converter for the writer.
 
 use std::io::Read;
 use std::path::Path;
@@ -43,6 +43,7 @@ fn unhex(text: &str) -> Vec<u8> {
 
 fn key(salt: &[u8]) -> [u8; 32] {
     let secret: Vec<u8> = unhex(A).iter().zip(unhex(B)).map(|(a, b)| a ^ b).collect();
+    // "autopiano" is LegatoEngine's first name; it stays here so scripts made before the rename still open
     let mut info = b"autopiano/".to_vec();
     info.extend_from_slice(MAGIC);
     let mut okm = [0u8; 32];
@@ -61,11 +62,11 @@ pub fn parse(data: &[u8]) -> Result<Script, ApnoError> {
 
 fn unseal(data: &[u8]) -> Result<Value, ApnoError> {
     if data.len() < HEADER || &data[..4] != MAGIC {
-        return error("This is not an AutoPiano script.");
+        return error("This is not a LegatoEngine script.");
     }
     let version = u16::from_le_bytes([data[4], data[5]]);
     if version > FORMAT_VERSION {
-        return Err(ApnoError(format!("This script needs a newer AutoPiano (format v{version}).")));
+        return Err(ApnoError(format!("This script needs a newer LegatoEngine (format v{version}).")));
     }
     if version < 1 {
         return error("This script is damaged.");

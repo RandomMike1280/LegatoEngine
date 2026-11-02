@@ -5,7 +5,7 @@
 //! up, then the same for Ctrl. Key releases are moved out of those modifier windows,
 //! and a key is always released long enough before it is pressed again.
 //!
-//! This is a line-for-line port of `src/autopiano/player/timeline.py`; the parity test
+//! This is a line-for-line port of `src/legatoengine/player/timeline.py`; the parity test
 //! checks both give the same presses at the same times.
 
 use std::collections::HashMap;

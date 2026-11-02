@@ -2,9 +2,9 @@ import random
 
 import pytest
 
-from autopiano.layout import load_layout
-from autopiano.models import Modifier, Note, Role
-from autopiano.player.timeline import PlaySettings, build_timeline, expected_modifiers, simulate_typing
+from legatoengine.layout import load_layout
+from legatoengine.models import Modifier, Note, Role
+from legatoengine.player.timeline import PlaySettings, build_timeline, expected_modifiers, simulate_typing
 
 LAYOUT = load_layout("vp61")
 SHIFTED = dict(zip("1234567890", "!@#$%^&*()"))

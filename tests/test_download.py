@@ -8,12 +8,12 @@ import threading
 import pytest
 import soundfile
 
-from autopiano import cli
-from autopiano.format.apno import read_script
-from autopiano.ingest import download as dl
-from autopiano.ingest.download import LinkError, download, find_links, is_link, with_scheme
-from autopiano.models import Note
-from autopiano.synth import render
+from legatoengine import cli
+from legatoengine.format.apno import read_script
+from legatoengine.ingest import download as dl
+from legatoengine.ingest.download import LinkError, download, find_links, is_link, with_scheme
+from legatoengine.models import Note
+from legatoengine.synth import render
 
 from .helpers import write_midi
 
@@ -51,7 +51,7 @@ def test_find_links_in_pasted_text():
 - [Nuvole Bianche](https://www.youtube.com/watch?v=4VR-6AS0-l4).
 youtu.be/PaXKf0JEzEA, and again https://www.youtube.com/watch?v=7maJOI3QMu0
 grep -oE 'https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}' "list.md"
-not links: song.mp3 ~/Music/AutoPiano/Covers/ https:// http://localhost/x"""
+not links: song.mp3 ~/Music/LegatoEngine/Covers/ https:// http://localhost/x"""
     assert find_links(text) == [
         "https://www.youtube.com/watch?v=7maJOI3QMu0",
         "https://www.youtube.com/watch?v=4VR-6AS0-l4",

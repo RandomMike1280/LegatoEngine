@@ -1,12 +1,12 @@
 """Command-line tools: convert songs, inspect and play scripts, and test real key presses.
 
-    autopiano-cli convert song.mp3 --style simplified
-    autopiano-cli convert "https://www.youtube.com/watch?v=…" --type piano
-    autopiano-cli edit "My Song.apno" --start 0:12 --end 1:40 --transpose -2 --tempo 110
-    autopiano-cli info "My Song.apno"
-    autopiano-cli search moonlight sonata
-    autopiano-cli play "My Song.apno" --dry-run
-    autopiano-cli keytest
+    legatoengine-cli convert song.mp3 --style simplified
+    legatoengine-cli convert "https://www.youtube.com/watch?v=…" --type piano
+    legatoengine-cli edit "My Song.apno" --start 0:12 --end 1:40 --transpose -2 --tempo 110
+    legatoengine-cli info "My Song.apno"
+    legatoengine-cli search moonlight sonata
+    legatoengine-cli play "My Song.apno" --dry-run
+    legatoengine-cli keytest
 """
 
 from __future__ import annotations
@@ -19,14 +19,16 @@ import time
 from datetime import datetime
 from pathlib import Path
 
+from .paths import move_old_folders
+
 PERMISSION_HELP = (
-    "AutoPiano can't press keys yet. macOS needs the Accessibility permission for the app that runs it:\n"
+    "LegatoEngine can't press keys yet. macOS needs the Accessibility permission for the app that runs it:\n"
     "System Settings → Privacy & Security → Accessibility → turn on your terminal app (Terminal, iTerm, …),\n"
     "then run this again."
 )
 NO_KEYS_HELP = (
-    "Pressing keys only works on macOS so far. On Windows, play scripts with AutoPiano Player\n"
-    "(player-app in the project folder), or check one with: autopiano-cli play song.apno --dry-run"
+    "Pressing keys only works on macOS so far. On Windows, play scripts with LegatoPlayer\n"
+    "(player-app in the project folder), or check one with: legatoengine-cli play song.apno --dry-run"
 )
 
 
@@ -35,12 +37,12 @@ def main(argv: list[str] | None = None) -> int:
     from .layout import list_layouts
     from .library import SORTS
 
-    parser = argparse.ArgumentParser(prog="autopiano-cli", description="Turn songs into AutoPiano scripts and play them.")
+    parser = argparse.ArgumentParser(prog="legatoengine-cli", description="Turn songs into LegatoEngine scripts and play them.")
     sub = parser.add_subparsers(dest="command", required=True, metavar="command")
 
     c = sub.add_parser("convert", help="turn a song (audio, MIDI or a link) into an .apno script")
     c.add_argument("song", help="an audio file (mp3, wav, m4a, flac, …), a MIDI file, or a link (YouTube, SoundCloud, …)")
-    c.add_argument("-o", "--output", help="file or folder to save to (default: ~/Music/AutoPiano)")
+    c.add_argument("-o", "--output", help="file or folder to save to (default: ~/Music/LegatoEngine)")
     c.add_argument("--type", choices=["auto", "full", "piano", "midi"], default="auto",
                    help="auto (default), full (a song with vocals and band), piano (one instrument), midi")
     c.add_argument("--style", choices=list(PRESETS), default="full", help="how much to play (default: full)")
@@ -99,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _fail(message: str) -> int:
-    print(f"autopiano-cli: {message}", file=sys.stderr)
+    print(f"legatoengine-cli: {message}", file=sys.stderr)
     return 1
 
 
@@ -297,7 +299,7 @@ def _describe(script) -> str:
         lines.append(f"  edited:  {Edits.from_dict(change).describe() or 'saved again unchanged'}")
     if meta.created:
         made = datetime.fromtimestamp(meta.created).strftime("%Y-%m-%d %H:%M")
-        lines.append(f"  made:    {made} by AutoPiano {meta.converter_version}")
+        lines.append(f"  made:    {made} by LegatoEngine {meta.converter_version}")
     return "\n".join(lines)
 
 
@@ -497,8 +499,8 @@ def _keytest(args) -> int:
 
     app = QApplication.instance() or QApplication(sys.argv[:1])
     window = QWidget()
-    window.setWindowTitle("AutoPiano key test")
-    label = QLabel("AutoPiano is about to type into the box below.\nKeep your hands off the keyboard for a few seconds.")
+    window.setWindowTitle("LegatoEngine key test")
+    label = QLabel("LegatoEngine is about to type into the box below.\nKeep your hands off the keyboard for a few seconds.")
     box = QPlainTextEdit()
     recorder = Recorder()
     box.installEventFilter(recorder)
@@ -585,7 +587,7 @@ def _keytest(args) -> int:
 
 
 def run() -> int:
-    """The autopiano-cli command. On macOS a conversion first restarts itself with
+    """The legatoengine-cli command. On macOS a conversion first restarts itself with
     MallocLargeCache=0, which macOS reads when a process starts: it then hands the memory of freed
     audio and model buffers straight back, instead of keeping up to about 1 GB of it on hand for
     reuse. (Windows has no such setting, and its execv starts a new process instead of replacing
@@ -599,6 +601,7 @@ def run() -> int:
             args = sys.orig_argv[1:]
         sys.stdout.flush()
         os.execv(sys.executable, [sys.executable, *args])
+    move_old_folders()
     if sys.platform == "win32":
         _prepare_windows_console()
     return main()

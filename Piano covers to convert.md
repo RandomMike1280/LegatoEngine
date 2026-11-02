@@ -11,10 +11,10 @@ field: every link goes to the queue, which converts them one after another and s
 **Save into**, pick or make a folder such as Covers; songs still converting or waiting are saved there. Each
 song takes a few minutes.
 
-**Or from Terminal** (run inside the AutoPiano folder; everything goes into a Covers folder):
+**Or from Terminal** (run inside the LegatoEngine folder; everything goes into a Covers folder):
 
 ```bash
-grep -oE 'https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}' "Piano covers to convert.md" | while read -r url; do uv run autopiano-cli convert "$url" --type piano -o ~/Music/AutoPiano/Covers/ < /dev/null; done
+grep -oE 'https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}' "Piano covers to convert.md" | while read -r url; do uv run legatoengine-cli convert "$url" --type piano -o ~/Music/LegatoEngine/Covers/ < /dev/null; done
 ```
 
 Pieces marked *hard* are dense arrangements: if one sounds cluttered in Roblox, convert it again with the

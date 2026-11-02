@@ -29,7 +29,7 @@ from .widgets import dropped, dropped_songs
 
 
 class PermissionBanner(QFrame):
-    """Shown until macOS lets AutoPiano press keys in other apps."""
+    """Shown until macOS lets LegatoEngine press keys in other apps."""
 
     def __init__(self, on_granted, parent: QWidget | None = None):
         super().__init__(parent)
@@ -39,7 +39,7 @@ class PermissionBanner(QFrame):
             "#banner { background: rgba(240, 140, 58, 0.16); border: 1px solid rgba(240, 140, 58, 0.5); border-radius: 8px; }"
         )
         text = QLabel(
-            "<b>AutoPiano needs the Accessibility permission</b> to press keys in Roblox and to hear its hotkeys. "
+            "<b>LegatoEngine needs the Accessibility permission</b> to press keys in Roblox and to hear its hotkeys. "
             "Converting and Test mode work without it."
         )
         text.setWordWrap(True)
@@ -68,7 +68,7 @@ class PermissionBanner(QFrame):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("AutoPiano")
+        self.setWindowTitle("LegatoEngine")
         self.setAcceptDrops(True)
         self.preview = PreviewPlayer(self)
         self.preview.set_sustain(settings.load("listen/sustain", False))

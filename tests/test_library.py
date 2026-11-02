@@ -1,10 +1,10 @@
 import os
 from pathlib import Path
 
-from autopiano import cli, library, paths
-from autopiano.format.apno import write_script
-from autopiano.library import Entry, scan, search, sort_entries, words
-from autopiano.models import Note, Script, ScriptMeta
+from legatoengine import cli, library, paths
+from legatoengine.format.apno import write_script
+from legatoengine.library import Entry, scan, search, sort_entries, words
+from legatoengine.models import Note, Script, ScriptMeta
 
 
 def _entries(*titles: str, folder: str = "") -> list[Entry]:

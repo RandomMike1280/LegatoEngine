@@ -5,10 +5,10 @@ import numpy as np
 import pytest
 import soundfile
 
-from autopiano.ingest.audio import load_audio, resample, retune, tuning_offset
-from autopiano.ingest.transcribe_mono import BASS, VOCALS, segment_notes
-from autopiano.models import Note, Role
-from autopiano.synth import render
+from legatoengine.ingest.audio import load_audio, resample, retune, tuning_offset
+from legatoengine.ingest.transcribe_mono import BASS, VOCALS, segment_notes
+from legatoengine.models import Note, Role
+from legatoengine.synth import render
 
 FT = 0.01  # 10 ms frames
 SR = 44100
@@ -126,7 +126,7 @@ def onset_f1(found: list[Note], truth: list[Note], tolerance=0.05) -> float:
 
 @pytest.mark.slow
 def test_piano_model_hears_rendered_notes():
-    from autopiano.ingest.transcribe_poly import transcribe_polyphonic
+    from legatoengine.ingest.transcribe_poly import transcribe_polyphonic
 
     truth = [Note(p, i * 0.4, 0.35, 90) for i, p in enumerate([60, 62, 64, 65, 67, 69, 71, 72])]
     truth += [Note(p, 3.6, 1.0, 80) for p in (48, 55, 64)]
@@ -137,7 +137,7 @@ def test_piano_model_hears_rendered_notes():
 
 @pytest.mark.slow
 def test_piano_model_hears_out_of_tune_audio_once_told_the_tuning():
-    from autopiano.ingest.transcribe_poly import transcribe_polyphonic
+    from legatoengine.ingest.transcribe_poly import transcribe_polyphonic
 
     truth = [Note(p, 0.3 + i * 0.4, 0.35, 90) for i, p in enumerate([60, 62, 64, 65, 67, 69, 71, 72, 74, 76])]
     truth += [Note(p, 4.5, 1.0, 80) for p in (48, 55, 64)]
@@ -150,7 +150,7 @@ def test_piano_model_hears_out_of_tune_audio_once_told_the_tuning():
 
 @pytest.mark.slow
 def test_piano_model_keeps_held_notes_whole_and_real_repeats_apart():
-    from autopiano.ingest.transcribe_poly import transcribe_polyphonic
+    from legatoengine.ingest.transcribe_poly import transcribe_polyphonic
 
     beat = 0.3
     held = Note(48, 0.5, 8 * beat, 90)
@@ -183,7 +183,7 @@ def sing(pitches: list[int], sharp: float = 0.0, sr: int = 16000) -> np.ndarray:
 
 @pytest.mark.slow
 def test_line_follows_a_sung_line():
-    from autopiano.ingest.transcribe_mono import transcribe_line
+    from legatoengine.ingest.transcribe_mono import transcribe_line
 
     pitches = [69, 71, 72, 74, 76, 74, 72, 71]
     notes = transcribe_line(sing(pitches), VOCALS, Role.MELODY)
@@ -193,7 +193,7 @@ def test_line_follows_a_sung_line():
 
 @pytest.mark.slow
 def test_line_is_heard_in_tune_once_told_the_tuning():
-    from autopiano.ingest.transcribe_mono import transcribe_line
+    from legatoengine.ingest.transcribe_mono import transcribe_line
 
     pitches = [69, 71, 72, 74, 76, 74, 72, 71]
     assert [n.pitch for n in transcribe_line(sing(pitches, sharp=0.45), VOCALS, Role.MELODY, tuning=0.45)] == pitches
@@ -201,7 +201,7 @@ def test_line_is_heard_in_tune_once_told_the_tuning():
 
 @pytest.mark.slow
 def test_a_quiet_line_is_heard_the_same():
-    from autopiano.ingest.transcribe_mono import transcribe_line
+    from legatoengine.ingest.transcribe_mono import transcribe_line
 
     pitches = [69, 71, 72, 74, 76, 74, 72, 71]
     assert [n.pitch for n in transcribe_line(sing(pitches) * 0.002, VOCALS, Role.MELODY)] == pitches  # about -60 dB
@@ -209,7 +209,7 @@ def test_a_quiet_line_is_heard_the_same():
 
 @pytest.mark.slow
 def test_line_follows_a_bass_line_down_to_low_e():
-    from autopiano.ingest.transcribe_mono import transcribe_line
+    from legatoengine.ingest.transcribe_mono import transcribe_line
 
     pitches = [36, 41, 43, 36, 40, 45, 31, 29, 28]  # F1 and E1 are below SwiftF0's own range
     audio = render([Note(p, 0.2 + i * 0.6, 0.5, 110) for i, p in enumerate(pitches)], 16000)
@@ -223,7 +223,7 @@ def test_the_double_speed_pass_only_fills_in_low_notes(monkeypatch):
     double-speed pass, but only below its floor."""
     from swift_f0 import PitchResult
 
-    from autopiano.ingest import transcribe_mono
+    from legatoengine.ingest import transcribe_mono
 
     n = 100  # 16 ms frames over 1.6 s; played twice as fast, the same audio fills half as many
     normal_hz = np.r_[np.full(40, 110.0), np.zeros(60)]

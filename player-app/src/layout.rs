@@ -9,8 +9,8 @@ use serde::Deserialize;
 use crate::model::Modifier;
 
 const SOURCES: [&str; 2] = [
-    include_str!("../../src/autopiano/layouts/vp61.json"),
-    include_str!("../../src/autopiano/layouts/vp88.json"),
+    include_str!("../../src/legatoengine/layouts/vp61.json"),
+    include_str!("../../src/legatoengine/layouts/vp88.json"),
 ];
 const WHITE_PITCH_CLASSES: [i32; 7] = [0, 2, 4, 5, 7, 9, 11];
 

@@ -1,17 +1,17 @@
 //! The player window, driven offscreen: nothing appears on screen and no hotkeys are taken.
-//! Set AUTOPIANO_SCREENSHOTS to a folder to save what the window looked like.
+//! Set LEGATOPLAYER_SCREENSHOTS to a folder to save what the window looked like.
 
 use std::path::{Path, PathBuf};
 use std::time::{Duration, Instant};
 
-use autopiano_player::app::App;
+use legatoplayer::app::App;
 use egui_kittest::Harness;
 use egui_kittest::kittest::Queryable;
 
 /// A library folder of its own for each test, since the tests run side by side.
 fn library(test: &str) -> PathBuf {
     let fixtures = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
-    let folder = std::env::temp_dir().join(format!("autopiano-player-{test}-{}", std::process::id()));
+    let folder = std::env::temp_dir().join(format!("legatoplayer-{test}-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&folder);
     std::fs::create_dir_all(folder.join("Classical")).unwrap();
     std::fs::copy(fixtures.join("random-1.apno"), folder.join("random-1.apno")).unwrap();
@@ -26,7 +26,7 @@ fn window(folder: PathBuf) -> Harness<'static, App> {
 }
 
 fn screenshot(harness: &mut Harness<'_, App>, name: &str) {
-    if let Some(folder) = std::env::var_os("AUTOPIANO_SCREENSHOTS") {
+    if let Some(folder) = std::env::var_os("LEGATOPLAYER_SCREENSHOTS") {
         harness.render().unwrap().save(Path::new(&folder).join(format!("{name}.png"))).unwrap();
     }
 }

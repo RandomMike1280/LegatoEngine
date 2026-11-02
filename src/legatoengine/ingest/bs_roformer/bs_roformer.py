@@ -1,5 +1,5 @@
 # Vendored unchanged from ZFTurbo/Music-Source-Separation-Training, models/bs_roformer/ at commit
-# e491b54 (MIT licence, see LICENSE in this folder), except where marked "AutoPiano:".
+# e491b54 (MIT licence, see LICENSE in this folder), except where marked "LegatoEngine:".
 
 from functools import partial
 
@@ -8,7 +8,7 @@ from torch import nn, einsum, tensor, Tensor
 from torch.nn import Module, ModuleList
 import torch.nn.functional as F
 
-from .attend import Attend  # AutoPiano: a relative import
+from .attend import Attend  # LegatoEngine: a relative import
 
 from torch.utils.checkpoint import checkpoint
 

@@ -8,12 +8,12 @@ import pytest  # noqa: E402
 from PySide6.QtCore import QCoreApplication, QMimeData, QObject, QSettings, Qt, QUrl, Signal  # noqa: E402
 from PySide6.QtWidgets import QApplication  # noqa: E402
 
-from autopiano import paths  # noqa: E402
-from autopiano.arrange.pipeline import ArrangeSettings  # noqa: E402
-from autopiano.format.apno import read_script  # noqa: E402
-from autopiano.gui.queue_box import FAILED, SAVED, WAITING, WORKING, QueueBox, free_path  # noqa: E402
-from autopiano.gui.widgets import dropped_songs  # noqa: E402
-from autopiano.ingest.convert import load_song  # noqa: E402
+from legatoengine import paths  # noqa: E402
+from legatoengine.arrange.pipeline import ArrangeSettings  # noqa: E402
+from legatoengine.format.apno import read_script  # noqa: E402
+from legatoengine.gui.queue_box import FAILED, SAVED, WAITING, WORKING, QueueBox, free_path  # noqa: E402
+from legatoengine.gui.widgets import dropped_songs  # noqa: E402
+from legatoengine.ingest.convert import load_song  # noqa: E402
 
 from .helpers import write_midi  # noqa: E402
 
@@ -42,8 +42,8 @@ class FakeJob(QObject):
 def app(tmp_path_factory):
     QSettings.setDefaultFormat(QSettings.Format.IniFormat)
     QSettings.setPath(QSettings.Format.IniFormat, QSettings.Scope.UserScope, str(tmp_path_factory.mktemp("settings")))
-    QCoreApplication.setOrganizationName("AutoPianoTest")
-    QCoreApplication.setApplicationName("AutoPianoTest")
+    QCoreApplication.setOrganizationName("LegatoEngineTest")
+    QCoreApplication.setApplicationName("LegatoEngineTest")
     return QApplication.instance() or QApplication([])
 
 
@@ -168,8 +168,8 @@ def test_free_path_and_dropped_songs(library, tmp_path):
 
 
 def test_pasting_several_links_into_the_convert_tab_queues_them(library, jobs):
-    from autopiano.gui.convert_panel import ConvertPanel
-    from autopiano.gui.preview import PreviewPlayer
+    from legatoengine.gui.convert_panel import ConvertPanel
+    from legatoengine.gui.preview import PreviewPlayer
 
     panel = ConvertPanel(PreviewPlayer())
     made = []

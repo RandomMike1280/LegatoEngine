@@ -1,16 +1,16 @@
 import pytest
 
-from autopiano.arrange.chords import enforce_key_gaps, group_chords
-from autopiano.arrange.cleanup import clean, drop_overtones, merge_duplicates
-from autopiano.arrange.key import choose_transpose, detect_key, key_name
-from autopiano.arrange.pipeline import PRESETS, ArrangeError, ArrangeSettings, arrange
-from autopiano.arrange.range_fit import fit_to_range
-from autopiano.arrange.reduce import ThinRules, thin_chords
-from autopiano.arrange.roles import assign_skyline_roles
-from autopiano.arrange.tempo import quantize_chords
-from autopiano.ingest.midi import read_midi
-from autopiano.layout import is_black, load_layout
-from autopiano.models import Modifier, Note, Role, Song
+from legatoengine.arrange.chords import enforce_key_gaps, group_chords
+from legatoengine.arrange.cleanup import clean, drop_overtones, merge_duplicates
+from legatoengine.arrange.key import choose_transpose, detect_key, key_name
+from legatoengine.arrange.pipeline import PRESETS, ArrangeError, ArrangeSettings, arrange
+from legatoengine.arrange.range_fit import fit_to_range
+from legatoengine.arrange.reduce import ThinRules, thin_chords
+from legatoengine.arrange.roles import assign_skyline_roles
+from legatoengine.arrange.tempo import quantize_chords
+from legatoengine.ingest.midi import read_midi
+from legatoengine.layout import is_black, load_layout
+from legatoengine.models import Modifier, Note, Role, Song
 
 from .helpers import scale_song, write_midi
 

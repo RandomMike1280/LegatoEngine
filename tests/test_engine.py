@@ -1,8 +1,8 @@
 import time
 
-from autopiano.player.engine import Player, State
-from autopiano.player.keyboard import DryRunKeyboard
-from autopiano.player.timeline import Action, simulate_typing
+from legatoengine.player.engine import Player, State
+from legatoengine.player.keyboard import DryRunKeyboard
+from legatoengine.player.timeline import Action, simulate_typing
 
 
 def test_events_land_on_time():

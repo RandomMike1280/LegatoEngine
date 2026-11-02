@@ -1,6 +1,6 @@
-//! AutoPiano Player: plays finished `.apno` scripts on Roblox pianos, on macOS and Windows.
+//! LegatoPlayer: plays finished `.apno` scripts on Roblox pianos, on macOS and Windows.
 //!
-//! Converting songs needs the full AutoPiano app (Apple Silicon only); this player only
+//! Converting songs needs the full LegatoEngine app (Apple Silicon only); this player only
 //! reads the scripts it writes, so it runs anywhere.
 
 pub mod apno;

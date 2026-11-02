@@ -1,11 +1,11 @@
 import pytest
 
-from autopiano.arrange.edit import EditError, Edits, clock, edit_script
-from autopiano.arrange.pipeline import ArrangeSettings, arrange
-from autopiano.format.apno import read_script, write_script
-from autopiano.layout import load_layout
-from autopiano.models import Modifier, Note, Role, Song
-from autopiano.player.timeline import build_timeline, simulate_typing
+from legatoengine.arrange.edit import EditError, Edits, clock, edit_script
+from legatoengine.arrange.pipeline import ArrangeSettings, arrange
+from legatoengine.format.apno import read_script, write_script
+from legatoengine.layout import load_layout
+from legatoengine.models import Modifier, Note, Role, Song
+from legatoengine.player.timeline import build_timeline, simulate_typing
 
 from .test_arrange import check_script, song_from
 

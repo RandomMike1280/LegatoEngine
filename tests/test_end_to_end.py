@@ -1,12 +1,12 @@
 """MIDI file -> arrangement -> .apno file -> timeline -> player, without Roblox."""
 
-from autopiano.arrange.pipeline import ArrangeSettings, arrange
-from autopiano.format.apno import read_script, write_script
-from autopiano.ingest.midi import read_midi
-from autopiano.models import Modifier
-from autopiano.player.engine import Player
-from autopiano.player.keyboard import DryRunKeyboard
-from autopiano.player.timeline import Action, PlaySettings, build_timeline, simulate_typing
+from legatoengine.arrange.pipeline import ArrangeSettings, arrange
+from legatoengine.format.apno import read_script, write_script
+from legatoengine.ingest.midi import read_midi
+from legatoengine.models import Modifier
+from legatoengine.player.engine import Player
+from legatoengine.player.keyboard import DryRunKeyboard
+from legatoengine.player.timeline import Action, PlaySettings, build_timeline, simulate_typing
 
 from .helpers import scale_song, write_midi
 

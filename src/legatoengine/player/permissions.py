@@ -1,4 +1,4 @@
-"""The macOS permission AutoPiano needs to press keys in other apps."""
+"""The macOS permission LegatoEngine needs to press keys in other apps."""
 
 from __future__ import annotations
 

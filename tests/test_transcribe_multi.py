@@ -6,10 +6,10 @@ import json
 import numpy as np
 import pytest
 
-from autopiano.ingest import transcribe_multi
-from autopiano.ingest.separate import ModelDownloadError
-from autopiano.models import Note, Role
-from autopiano.synth import render
+from legatoengine.ingest import transcribe_multi
+from legatoengine.ingest.separate import ModelDownloadError
+from legatoengine.models import Note, Role
+from legatoengine.synth import render
 
 SR = 44100
 

@@ -9,11 +9,11 @@ BEGIN
   BEGIN
     BLOCK "040904B0"
     BEGIN
-      VALUE "FileDescription", "AutoPiano Player"
-      VALUE "ProductName", "AutoPiano Player"
+      VALUE "FileDescription", "LegatoPlayer"
+      VALUE "ProductName", "LegatoPlayer"
       VALUE "FileVersion", "0.1.0"
       VALUE "ProductVersion", "0.1.0"
-      VALUE "OriginalFilename", "AutoPiano Player.exe"
+      VALUE "OriginalFilename", "LegatoPlayer.exe"
     END
   END
   BLOCK "VarFileInfo"

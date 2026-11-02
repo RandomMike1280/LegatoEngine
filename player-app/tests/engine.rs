@@ -5,9 +5,9 @@ use std::collections::BTreeSet;
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
-use autopiano_player::engine::{Player, State};
-use autopiano_player::keys::{Backend, Keyboard};
-use autopiano_player::timeline::{Action, Key};
+use legatoplayer::engine::{Player, State};
+use legatoplayer::keys::{Backend, Keyboard};
+use legatoplayer::timeline::{Action, Key};
 
 #[derive(Clone, Default)]
 struct Recorder {

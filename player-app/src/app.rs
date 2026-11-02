@@ -12,7 +12,7 @@ use crate::engine::{Player, State};
 use crate::hotkeys::{Command, HOTKEYS, Hotkeys};
 use crate::keys::Keyboard;
 use crate::layout::{Layout, is_black, load_layout};
-use crate::library::{Entry, Library, Sort, default_folder, search, sort_entries};
+use crate::library::{Entry, Library, Sort, default_folder, moved_path, old_default_folder, search, sort_entries};
 use crate::model::{Modifier, Note, Role, Script, transposed_key_name};
 use crate::possible::make_possible;
 use crate::timeline::{Action, PlaySettings, build_timeline};
@@ -213,7 +213,13 @@ pub struct App {
 
 impl App {
     pub fn new(cc: &eframe::CreationContext<'_>, open: Option<PathBuf>) -> App {
-        let settings: Settings = cc.storage.and_then(|s| eframe::get_value(s, eframe::APP_KEY)).unwrap_or_default();
+        let mut settings: Settings = cc.storage.and_then(|s| eframe::get_value(s, eframe::APP_KEY)).unwrap_or_default();
+        // Settings saved before the rename point into Music/AutoPiano, which has moved to Music/LegatoEngine.
+        let (old, new) = (old_default_folder(), default_folder());
+        if let Some(folder) = moved_path(&settings.folder, &old, &new) {
+            settings.folder = folder;
+        }
+        settings.last_script = settings.last_script.map(|p| moved_path(&p, &old, &new).unwrap_or(p));
         let mut app = App::build(cc, settings, true);
         if let Some(path) = open {
             app.open(&path, true);
@@ -455,7 +461,7 @@ impl App {
         egui::Panel::bottom("library_buttons").frame(egui::Frame::NONE).show(ui, |ui| {
             ui.add_space(6.0);
             if ui.add_enabled(stopped, egui::Button::new("Open a script…")).clicked() {
-                let mut dialog = rfd::FileDialog::new().add_filter("AutoPiano script", &[EXTENSION]);
+                let mut dialog = rfd::FileDialog::new().add_filter("LegatoEngine script", &[EXTENSION]);
                 if self.settings.folder.is_dir() {
                     dialog = dialog.set_directory(&self.settings.folder);
                 }
@@ -468,7 +474,7 @@ impl App {
                 ui.add_space(8.0);
                 ui.label(
                     RichText::new(
-                        "No scripts here yet. Convert songs with AutoPiano on a Mac, then put the .apno files in this folder \
+                        "No scripts here yet. Convert songs with LegatoEngine on a Mac, then put the .apno files in this folder \
                          (subfolders are fine) or drop them on this window.",
                     )
                     .weak(),
@@ -500,7 +506,7 @@ impl App {
                     chosen = Some(entry.path.clone());
                 }
                 if !entry.readable {
-                    response.on_disabled_hover_text("Made by a newer AutoPiano, or damaged.");
+                    response.on_disabled_hover_text("Made by a newer LegatoEngine, or damaged.");
                 }
             }
         });
@@ -747,12 +753,12 @@ impl App {
         }
         let modal = egui::Modal::new(egui::Id::unique("permission")).show(ctx, |ui| {
             ui.set_max_width(420.0);
-            ui.heading("Allow AutoPiano Player to press keys");
+            ui.heading("Allow LegatoPlayer to press keys");
             ui.add_space(6.0);
             ui.label("To play in Roblox, the player needs the Accessibility permission.");
             ui.add_space(4.0);
             ui.label(
-                "In System Settings → Privacy & Security → Accessibility, turn on AutoPiano Player. \
+                "In System Settings → Privacy & Security → Accessibility, turn on LegatoPlayer. \
                  Then press Play again.\n\nWant to try it first? Turn on Test mode.",
             );
             ui.add_space(10.0);
@@ -796,8 +802,8 @@ impl App {
             self.open(path, true);
         } else if !dropped.is_empty() {
             self.error = Some(format!(
-                "Only AutoPiano scripts (.{EXTENSION}) can be played here. Songs, MIDI files and links are converted \
-                 by AutoPiano on a Mac."
+                "Only LegatoEngine scripts (.{EXTENSION}) can be played here. Songs, MIDI files and links are converted \
+                 by LegatoEngine on a Mac."
             ));
         }
     }

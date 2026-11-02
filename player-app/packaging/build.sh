@@ -1,7 +1,7 @@
 #!/bin/bash
-# Builds AutoPiano Player for every platform from this Mac:
-#   dist/AutoPiano-Player-mac.zip      one app for both Apple Silicon and Intel Macs
-#   dist/AutoPiano-Player-windows.zip  a single exe for 64-bit Windows 10 and 11
+# Builds LegatoPlayer for every platform from this Mac:
+#   dist/LegatoPlayer-mac.zip      one app for both Apple Silicon and Intel Macs
+#   dist/LegatoPlayer-windows.zip  a single exe for 64-bit Windows 10 and 11
 #
 # Needs rustup with the aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-gnu
 # targets, and MinGW (brew install mingw-w64) for the Windows exe.
@@ -25,21 +25,21 @@ mkdir -p "$DIST"
 
 # ---- Mac: one universal app
 echo "== packaging the Mac app"
-APP="$STAGE/mac/AutoPiano Player.app"
+APP="$STAGE/mac/LegatoPlayer.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-lipo -create -output "$APP/Contents/MacOS/autopiano-player" \
-    target/aarch64-apple-darwin/release/autopiano-player \
-    target/x86_64-apple-darwin/release/autopiano-player
+lipo -create -output "$APP/Contents/MacOS/legatoplayer" \
+    target/aarch64-apple-darwin/release/legatoplayer \
+    target/x86_64-apple-darwin/release/legatoplayer
 cp packaging/icon.icns "$APP/Contents/Resources/AppIcon.icns"
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleName</key><string>AutoPiano Player</string>
-    <key>CFBundleDisplayName</key><string>AutoPiano Player</string>
-    <key>CFBundleIdentifier</key><string>local.autopiano.Player</string>
-    <key>CFBundleExecutable</key><string>autopiano-player</string>
+    <key>CFBundleName</key><string>LegatoPlayer</string>
+    <key>CFBundleDisplayName</key><string>LegatoPlayer</string>
+    <key>CFBundleIdentifier</key><string>local.legatoengine.LegatoPlayer</string>
+    <key>CFBundleExecutable</key><string>legatoplayer</string>
     <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleShortVersionString</key><string>$VERSION</string>
@@ -54,16 +54,16 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 PLIST
 codesign --force --deep --sign - "$APP"
 cp packaging/read-me-mac.txt "$STAGE/mac/Read me.txt"
-(cd "$STAGE/mac" && ditto -c -k --norsrc --noextattr --noacl . "$OLDPWD/$DIST/AutoPiano-Player-mac.zip")
+(cd "$STAGE/mac" && ditto -c -k --norsrc --noextattr --noacl . "$OLDPWD/$DIST/LegatoPlayer-mac.zip")
 
 # ---- Windows: the exe and its read-me
 echo "== packaging the Windows exe"
 mkdir -p "$STAGE/windows"
-cp target/x86_64-pc-windows-gnu/release/autopiano-player.exe "$STAGE/windows/AutoPiano Player.exe"
+cp target/x86_64-pc-windows-gnu/release/legatoplayer.exe "$STAGE/windows/LegatoPlayer.exe"
 # Windows Notepad wants CRLF line ends
 sed 's/$/\r/' packaging/read-me-windows.txt > "$STAGE/windows/Read me.txt"
-(cd "$STAGE/windows" && zip -q -X -r "$OLDPWD/$DIST/AutoPiano-Player-windows.zip" .)
+(cd "$STAGE/windows" && zip -q -X -r "$OLDPWD/$DIST/LegatoPlayer-windows.zip" .)
 
 echo "== done"
-lipo -archs "$APP/Contents/MacOS/autopiano-player"
+lipo -archs "$APP/Contents/MacOS/legatoplayer"
 ls -lh "$DIST"

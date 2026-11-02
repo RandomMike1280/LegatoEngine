@@ -142,7 +142,7 @@ class Player:
         self._stop_requested = self._pause_requested = False
         self._wake.clear()
         self._thread = threading.Thread(
-            target=self._run, args=(start / self._speed, countdown), name="autopiano-player", daemon=True
+            target=self._run, args=(start / self._speed, countdown), name="legatoengine-player", daemon=True
         )
         self._thread.start()
 

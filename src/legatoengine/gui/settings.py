@@ -1,4 +1,4 @@
-"""Remembers choices between launches (stored in AutoPiano's macOS preferences)."""
+"""Remembers choices between launches (stored in LegatoEngine's macOS preferences)."""
 
 from __future__ import annotations
 
@@ -25,3 +25,13 @@ def load(key: str, default):
 
 def save(key: str, value) -> None:
     QSettings().setValue(key, value)
+
+
+def copy_old_settings(old: QSettings | None = None) -> None:
+    """Brings over the choices remembered before the rename, when there are none yet."""
+    settings = QSettings()
+    if settings.allKeys():
+        return
+    old = old or QSettings("autopiano.local", "AutoPiano")  # AutoPiano's organization domain and name
+    for key in old.allKeys():
+        settings.setValue(key, old.value(key))

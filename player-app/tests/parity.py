@@ -7,7 +7,7 @@
         runs the Rust `dump` example (cargo build --example dump) on real scripts and
         compares its output with the Python player's, file by file
 
-Run from the AutoPiano folder so `autopiano` imports from the converter.
+Run from the LegatoEngine folder so `legatoengine` imports from the converter.
 """
 
 from __future__ import annotations
@@ -18,11 +18,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-from autopiano.arrange.possible import make_possible
-from autopiano.format.apno import read_script, write_script
-from autopiano.layout import load_layout
-from autopiano.models import Note, Role, Script, ScriptMeta
-from autopiano.player.timeline import PlaySettings, build_timeline
+from legatoengine.arrange.possible import make_possible
+from legatoengine.format.apno import read_script, write_script
+from legatoengine.layout import load_layout
+from legatoengine.models import Note, Role, Script, ScriptMeta
+from legatoengine.player.timeline import PlaySettings, build_timeline
 
 FIXTURES = Path(__file__).parent / "fixtures"
 SETTINGS = [(1.0, "natural"), (0.75, "natural"), (1.5, "natural"), (1.0, "tap"), (1.25, "tap")]

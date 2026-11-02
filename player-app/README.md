@@ -1,10 +1,12 @@
-# AutoPiano Player
+# LegatoPlayer
 
-A small app that plays finished AutoPiano scripts (`.apno`) on Roblox pianos, for Windows and for Macs with Apple Silicon or Intel chips. Converting songs into scripts still needs the full AutoPiano app on an Apple Silicon Mac, or its command line on Windows (see [Converting on Windows](../README.md#converting-on-windows)); this player only reads what they write.
+A small app that plays finished LegatoEngine scripts (`.apno`) on Roblox pianos, for Windows and for Macs with Apple Silicon or Intel chips. Converting songs into scripts still needs the full LegatoEngine app on an Apple Silicon Mac, or its command line on Windows (see [Converting on Windows](../README.md#converting-on-windows)); this player only reads what they write.
+
+It was called AutoPiano Player at first. The first time it starts, it moves `Music/AutoPiano` to `Music/LegatoEngine` and keeps your settings.
 
 It has the Play tab's features:
 
-- **Library**: every script in `Music/AutoPiano` and the folders inside it, with the same forgiving search (accents, spacing and small typos don't matter) and sorting. You can pick another folder, open a single script, or drop one on the window.
+- **Library**: every script in `Music/LegatoEngine` and the folders inside it, with the same forgiving search (accents, spacing and small typos don't matter) and sorting. You can pick another folder, open a single script, or drop one on the window.
 - **Piano roll**: colored by part (melody orange, bass blue, harmony grey). Click it to start partway through.
 - **Playback**: Play, Pause and Stop, speed from 25% to 200%, a countdown, held or tapped keys, bringing Roblox to the front, and a test mode that presses nothing.
 - **Keyboard-possible mode**: the same rewrite as the Play tab, so every chord can be pressed on a real keyboard.
@@ -22,8 +24,8 @@ This builds two zips in `player-app/dist/`, each with a short read-me:
 
 | File | For |
 |---|---|
-| `AutoPiano-Player-mac.zip` | `AutoPiano Player.app`, one app for Apple Silicon and Intel Macs on macOS 10.15 or later. Signed ad hoc. |
-| `AutoPiano-Player-windows.zip` | `AutoPiano Player.exe`, for 64-bit Windows 10 and 11. Needs no DLLs or installer. |
+| `LegatoPlayer-mac.zip` | `LegatoPlayer.app`, one app for Apple Silicon and Intel Macs on macOS 10.15 or later. Signed ad hoc. |
+| `LegatoPlayer-windows.zip` | `LegatoPlayer.exe`, for 64-bit Windows 10 and 11. Needs no DLLs or installer. |
 
 Neither is signed by Apple or Microsoft. The first launch on another computer shows a warning, and the read-mes explain how to get past it: **Open Anyway** on a Mac, **More info → Run anyway** on Windows.
 
@@ -46,7 +48,7 @@ These parts are line-for-line ports of the converter's Python code:
 | `engine.rs` | `player/engine.py` |
 | `library.rs` | `library.py` |
 
-The key layouts are read from the converter's own `src/autopiano/layouts/*.json` when the player is compiled, so the two can't disagree.
+The key layouts are read from the converter's own `src/legatoengine/layouts/*.json` when the player is compiled, so the two can't disagree.
 
 Key presses are sent like this:
 
@@ -61,7 +63,7 @@ cd player-app && cargo test
 
 - **`parity`**: the player turns the scripts in `tests/fixtures` into exactly the key presses, at exactly the times, that the Python player does. This covers five speed and hold settings, plus keyboard-possible mode. `tests/parity.py fixtures` regenerates the fixtures from the converter. `tests/parity.py check` compares any scripts, such as a whole library, using `cargo build --release --example dump`.
 - **`engine`**: timing, pause and resume, stop releasing every key, starting inside a Shift group, and the countdown. On an M-series Mac the worst timing error over 400 fast key events is about 0.04 ms, natively and under Rosetta.
-- **`window`**: drives the window offscreen. It covers the library, search, opening a script, keyboard-possible mode, and a test-mode run with pause and stop. Set `AUTOPIANO_SCREENSHOTS=<folder>` to save what the window looked like.
+- **`window`**: drives the window offscreen. It covers the library, search, opening a script, keyboard-possible mode, and a test-mode run with pause and stop. Set `LEGATOPLAYER_SCREENSHOTS=<folder>` to save what the window looked like.
 
 ## Not yet checked
 

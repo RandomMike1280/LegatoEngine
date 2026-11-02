@@ -1,10 +1,10 @@
 //! What the parity check compares: a script as the player reads it, the key presses it
 //! makes of it, and its keyboard-possible version, in the same shape `parity.py` writes.
 
-use autopiano_player::layout::load_layout;
-use autopiano_player::model::{Note, Script};
-use autopiano_player::possible::make_possible;
-use autopiano_player::timeline::{Action, PlaySettings, build_timeline};
+use legatoplayer::layout::load_layout;
+use legatoplayer::model::{Note, Script};
+use legatoplayer::possible::make_possible;
+use legatoplayer::timeline::{Action, PlaySettings, build_timeline};
 use serde_json::{Value, json};
 
 pub const SETTINGS: [(f64, bool); 5] = [(1.0, false), (0.75, false), (1.5, false), (1.0, true), (1.25, true)];

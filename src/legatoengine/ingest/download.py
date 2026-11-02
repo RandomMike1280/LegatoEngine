@@ -140,7 +140,7 @@ def _explain(message: str, warnings: list[str], have_js: bool) -> str:
     text = re.split(r"\s+(?:Use --|See  ?https?://|\(caused by)", text)[0].strip()
     if "Unsupported URL" in text:
         return (
-            "AutoPiano can't find a song at this link. Links to YouTube, SoundCloud, Bandcamp and most other "
+            "LegatoEngine can't find a song at this link. Links to YouTube, SoundCloud, Bandcamp and most other "
             "video and music sites work, and so do direct links to audio files."
         )
     if any(s in message for s in _OFFLINE):

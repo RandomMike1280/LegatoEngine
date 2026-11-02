@@ -45,10 +45,10 @@ class HotkeyListener:
             return self.active
         if self._worker is None:
             self._calls = queue.Queue()  # each worker gets its own queue, so a restart can't lose calls
-            self._worker = threading.Thread(target=self._work, args=(self._calls,), name="autopiano-hotkey-calls", daemon=True)
+            self._worker = threading.Thread(target=self._work, args=(self._calls,), name="legatoengine-hotkey-calls", daemon=True)
             self._worker.start()
         self._started.clear()
-        self._thread = threading.Thread(target=self._run, name="autopiano-hotkeys", daemon=True)
+        self._thread = threading.Thread(target=self._run, name="legatoengine-hotkeys", daemon=True)
         self._thread.start()
         self._started.wait(timeout)
         return self.active

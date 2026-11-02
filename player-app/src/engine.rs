@@ -1,7 +1,7 @@
 //! Plays a timeline in real time on its own thread, with sub-millisecond accuracy.
 //!
 //! Every way out of playback (finish, stop, pause, a panic) lets go of all keys first,
-//! so nothing stays stuck down. A port of `src/autopiano/player/engine.py`.
+//! so nothing stays stuck down. A port of `src/legatoengine/player/engine.py`.
 
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
@@ -128,7 +128,7 @@ impl Player {
         shared.presses.store(0, Ordering::Relaxed);
         set_state(&shared, State::Countdown); // so a second Play right away doesn't start another run
         let handle = std::thread::Builder::new()
-            .name("autopiano-player".into())
+            .name("legatoplayer".into())
             .spawn(move || run(shared, actions, speed, start / speed, countdown, keyboard))
             .expect("start the player thread");
         *self.thread.lock().unwrap() = Some(handle);

@@ -1,5 +1,5 @@
-from autopiano.layout import is_black, list_layouts, load_layout
-from autopiano.models import Modifier
+from legatoengine.layout import is_black, list_layouts, load_layout
+from legatoengine.models import Modifier
 
 SHIFTED = {"1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&", "8": "*", "9": "(", "0": ")"}
 

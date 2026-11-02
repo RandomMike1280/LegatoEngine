@@ -64,77 +64,6 @@ wheels = [
 ]
 
 [[package]]
-name = "autopiano"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "beartype" },
-    { name = "cryptography" },
-    { name = "einops" },
-    { name = "librosa" },
-    { name = "mido" },
-    { name = "mlx", marker = "sys_platform != 'win32'" },
-    { name = "msgpack" },
-    { name = "muscriptor" },
-    { name = "numpy" },
-    { name = "packaging" },
-    { name = "pyobjc-framework-applicationservices", marker = "sys_platform != 'win32'" },
-    { name = "pyobjc-framework-cocoa", marker = "sys_platform != 'win32'" },
-    { name = "pyobjc-framework-quartz", marker = "sys_platform != 'win32'" },
-    { name = "pyside6" },
-    { name = "rotary-embedding-torch" },
-    { name = "scipy" },
-    { name = "sounddevice" },
-    { name = "soundfile" },
-    { name = "swift-f0" },
-    { name = "torch", version = "2.15.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'win32'" },
-    { name = "torch", version = "2.15.0+cu132", source = { registry = "https://download.pytorch.org/whl/cu132" }, marker = "sys_platform == 'win32'" },
-    { name = "torchaudio" },
-    { name = "transkun" },
-    { name = "yt-dlp", extra = ["default"] },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "pyinstaller" },
-    { name = "pytest" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "beartype", specifier = ">=0.23.1" },
-    { name = "cryptography" },
-    { name = "einops", specifier = ">=0.8.2" },
-    { name = "librosa", specifier = ">=0.10" },
-    { name = "mido" },
-    { name = "mlx", marker = "platform_machine == 'arm64' and sys_platform == 'darwin'", specifier = ">=0.32.4" },
-    { name = "msgpack" },
-    { name = "muscriptor", specifier = "==0.4.0" },
-    { name = "numpy" },
-    { name = "packaging", specifier = ">=26.3" },
-    { name = "pyobjc-framework-applicationservices", marker = "sys_platform == 'darwin'" },
-    { name = "pyobjc-framework-cocoa", marker = "sys_platform == 'darwin'" },
-    { name = "pyobjc-framework-quartz", marker = "sys_platform == 'darwin'" },
-    { name = "pyside6" },
-    { name = "rotary-embedding-torch", specifier = ">=0.9.1" },
-    { name = "scipy" },
-    { name = "sounddevice" },
-    { name = "soundfile" },
-    { name = "swift-f0", specifier = ">=0.3.0" },
-    { name = "torch", marker = "sys_platform != 'win32'" },
-    { name = "torch", marker = "sys_platform == 'win32'", index = "https://download.pytorch.org/whl/cu132" },
-    { name = "torchaudio" },
-    { name = "transkun", specifier = ">=2.0.1" },
-    { name = "yt-dlp", extras = ["default"], specifier = ">=2026.10.21" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pyinstaller" },
-    { name = "pytest" },
-]
-
-[[package]]
 name = "beartype"
 version = "0.23.1"
 source = { registry = "https://pypi.org/simple" }
@@ -554,6 +483,77 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/19/8c/0f2ff2a8b7513e68871a74740c17a504b0488c679b379e6445ebb7bd78dc/lazy_loader-0.6.tar.gz", hash = "sha256:2f4b7824d6401958639008a0cae20c776b61dff619accd6890693e2de8260167", size = 18438, upload-time = "2026-09-21T21:31:32.982Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/23/93/4e45e37f26c820216704b36b8e67cc55c490a7abd287a78a26a2c0e21386/lazy_loader-0.6-py3-none-any.whl", hash = "sha256:77253be3391b06124a0e16105bd663b6c54470af1a9ca8e1cf026f38d58ed056", size = 8791, upload-time = "2026-09-21T21:31:31.632Z" },
+]
+
+[[package]]
+name = "legatoengine"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "beartype" },
+    { name = "cryptography" },
+    { name = "einops" },
+    { name = "librosa" },
+    { name = "mido" },
+    { name = "mlx", marker = "sys_platform != 'win32'" },
+    { name = "msgpack" },
+    { name = "muscriptor" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "pyobjc-framework-applicationservices", marker = "sys_platform != 'win32'" },
+    { name = "pyobjc-framework-cocoa", marker = "sys_platform != 'win32'" },
+    { name = "pyobjc-framework-quartz", marker = "sys_platform != 'win32'" },
+    { name = "pyside6" },
+    { name = "rotary-embedding-torch" },
+    { name = "scipy" },
+    { name = "sounddevice" },
+    { name = "soundfile" },
+    { name = "swift-f0" },
+    { name = "torch", version = "2.15.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'win32'" },
+    { name = "torch", version = "2.15.0+cu132", source = { registry = "https://download.pytorch.org/whl/cu132" }, marker = "sys_platform == 'win32'" },
+    { name = "torchaudio" },
+    { name = "transkun" },
+    { name = "yt-dlp", extra = ["default"] },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pyinstaller" },
+    { name = "pytest" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beartype", specifier = ">=0.23.1" },
+    { name = "cryptography" },
+    { name = "einops", specifier = ">=0.8.2" },
+    { name = "librosa", specifier = ">=0.10" },
+    { name = "mido" },
+    { name = "mlx", marker = "platform_machine == 'arm64' and sys_platform == 'darwin'", specifier = ">=0.32.4" },
+    { name = "msgpack" },
+    { name = "muscriptor", specifier = "==0.4.0" },
+    { name = "numpy" },
+    { name = "packaging", specifier = ">=26.3" },
+    { name = "pyobjc-framework-applicationservices", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-cocoa", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-quartz", marker = "sys_platform == 'darwin'" },
+    { name = "pyside6" },
+    { name = "rotary-embedding-torch", specifier = ">=0.9.1" },
+    { name = "scipy" },
+    { name = "sounddevice" },
+    { name = "soundfile" },
+    { name = "swift-f0", specifier = ">=0.3.0" },
+    { name = "torch", marker = "sys_platform != 'win32'" },
+    { name = "torch", marker = "sys_platform == 'win32'", index = "https://download.pytorch.org/whl/cu132" },
+    { name = "torchaudio" },
+    { name = "transkun", specifier = ">=2.0.1" },
+    { name = "yt-dlp", extras = ["default"], specifier = ">=2026.10.21" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pyinstaller" },
+    { name = "pytest" },
 ]
 
 [[package]]

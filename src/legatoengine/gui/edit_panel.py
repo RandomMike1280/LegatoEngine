@@ -215,7 +215,7 @@ class EditPanel(QWidget):
     # ---- opening
 
     def _open_dialog(self) -> None:
-        path, _ = QFileDialog.getOpenFileName(self, "Open a script", str(LIBRARY_DIR), f"AutoPiano scripts (*{EXTENSION})")
+        path, _ = QFileDialog.getOpenFileName(self, "Open a script", str(LIBRARY_DIR), f"LegatoEngine scripts (*{EXTENSION})")
         if path:
             self.load(path)
 

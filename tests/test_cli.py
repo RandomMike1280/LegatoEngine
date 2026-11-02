@@ -2,10 +2,10 @@ from collections import defaultdict
 
 import pytest
 
-from autopiano import cli
-from autopiano.format.apno import read_script
-from autopiano.models import Modifier
-from autopiano.player.timeline import build_timeline, simulate_typing
+from legatoengine import cli
+from legatoengine.format.apno import read_script
+from legatoengine.models import Modifier
+from legatoengine.player.timeline import build_timeline, simulate_typing
 
 from .helpers import write_midi
 
@@ -54,7 +54,7 @@ def test_bad_input_is_reported_not_raised(tmp_path, capsys):
     junk = tmp_path / "junk.apno"
     junk.write_bytes(b"not a script")
     assert cli.main(["info", str(junk)]) == 1
-    assert "autopiano-cli:" in capsys.readouterr().err
+    assert "legatoengine-cli:" in capsys.readouterr().err
 
 
 def test_conversions_restart_to_free_memory_at_once(monkeypatch):
@@ -67,13 +67,14 @@ def test_conversions_restart_to_free_memory_at_once(monkeypatch):
     monkeypatch.delenv("MallocLargeCache", raising=False)
     monkeypatch.setattr(cli.os, "execv", execv)
     monkeypatch.setattr(cli, "main", lambda: 0)
-    monkeypatch.setattr(cli.sys, "argv", ["autopiano-cli", "info", "s.apno"])
+    monkeypatch.setattr(cli, "move_old_folders", lambda: [])
+    monkeypatch.setattr(cli.sys, "argv", ["legatoengine-cli", "info", "s.apno"])
     assert cli.run() == 0 and not restarts
-    monkeypatch.setattr(cli.sys, "argv", ["autopiano-cli", "convert", "song.mp3"])
-    monkeypatch.setattr(cli.sys, "orig_argv", ["python", "/venv/bin/autopiano-cli", "convert", "song.mp3"])
+    monkeypatch.setattr(cli.sys, "argv", ["legatoengine-cli", "convert", "song.mp3"])
+    monkeypatch.setattr(cli.sys, "orig_argv", ["python", "/venv/bin/legatoengine-cli", "convert", "song.mp3"])
     with pytest.raises(SystemExit):
         cli.run()
-    assert restarts == [[cli.sys.executable, "/venv/bin/autopiano-cli", "convert", "song.mp3"]]
+    assert restarts == [[cli.sys.executable, "/venv/bin/legatoengine-cli", "convert", "song.mp3"]]
     assert cli.os.environ["MallocLargeCache"] == "0"
     assert cli.run() == 0 and len(restarts) == 1  # the restarted process just converts
 

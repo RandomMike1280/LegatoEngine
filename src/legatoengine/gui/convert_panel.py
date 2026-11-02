@@ -63,7 +63,7 @@ class ConvertPanel(QWidget):
         self.link = QLineEdit(placeholderText="or paste links (YouTube, SoundCloud…)")
         self.link.setClearButtonEnabled(True)
         self.link.setToolTip(
-            "Convert downloads the song first, into ~/Music/AutoPiano/Downloads.\n"
+            "Convert downloads the song first, into ~/Music/LegatoEngine/Downloads.\n"
             "Most video and music sites work, and so do direct links to audio files.\n"
             "Paste several links at once (a list, even a whole page of text) to queue them all."
         )

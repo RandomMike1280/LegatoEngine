@@ -1,5 +1,5 @@
 # Vendored unchanged from ZFTurbo/Music-Source-Separation-Training, models/bs_roformer/ at commit
-# e491b54 (MIT licence, see LICENSE in this folder), except where marked "AutoPiano:".
+# e491b54 (MIT licence, see LICENSE in this folder), except where marked "LegatoEngine:".
 
 from functools import wraps
 from packaging import version

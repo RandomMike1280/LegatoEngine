@@ -10,12 +10,12 @@ import pytest  # noqa: E402
 from PySide6.QtCore import QCoreApplication, QSettings  # noqa: E402
 from PySide6.QtWidgets import QApplication  # noqa: E402
 
-from autopiano import paths  # noqa: E402
-from autopiano.arrange.possible import make_possible  # noqa: E402
-from autopiano.format.apno import write_script  # noqa: E402
-from autopiano.layout import load_layout  # noqa: E402
-from autopiano.models import Modifier, Note, Role, Script, ScriptMeta  # noqa: E402
-from autopiano.player.timeline import build_timeline  # noqa: E402
+from legatoengine import paths  # noqa: E402
+from legatoengine.arrange.possible import make_possible  # noqa: E402
+from legatoengine.format.apno import write_script  # noqa: E402
+from legatoengine.layout import load_layout  # noqa: E402
+from legatoengine.models import Modifier, Note, Role, Script, ScriptMeta  # noqa: E402
+from legatoengine.player.timeline import build_timeline  # noqa: E402
 
 M, B, H = Role.MELODY, Role.BASS, Role.HARMONY
 VP61, VP88 = load_layout("vp61"), load_layout("vp88")
@@ -127,11 +127,11 @@ def test_random_chords_always_come_out_pressable(layout):
 def panel(tmp_path, monkeypatch):
     QSettings.setDefaultFormat(QSettings.Format.IniFormat)
     QSettings.setPath(QSettings.Format.IniFormat, QSettings.Scope.UserScope, str(tmp_path / "settings"))
-    QCoreApplication.setOrganizationName("AutoPianoTest")
-    QCoreApplication.setApplicationName("AutoPianoTest")
+    QCoreApplication.setOrganizationName("LegatoEngineTest")
+    QCoreApplication.setApplicationName("LegatoEngineTest")
     QApplication.instance() or QApplication([])
-    from autopiano.gui import player_panel
-    from autopiano.gui.preview import PreviewPlayer
+    from legatoengine.gui import player_panel
+    from legatoengine.gui.preview import PreviewPlayer
 
     library = tmp_path / "library"
     monkeypatch.setattr(paths, "LIBRARY_DIR", library)
@@ -150,7 +150,7 @@ def panel(tmp_path, monkeypatch):
 
 
 def test_the_play_tab_toggle_changes_what_is_shown_heard_and_pressed(panel):
-    from autopiano.gui import settings
+    from legatoengine.gui import settings
 
     assert not panel.possible.isChecked() and panel.possible_note.text() == ""
     assert 66 in [n.pitch for n in panel.roll.roll._notes]

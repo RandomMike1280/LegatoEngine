@@ -1,18 +1,18 @@
-AutoPiano Player for Windows (64-bit Windows 10 or 11)
+LegatoPlayer for Windows (64-bit Windows 10 or 11)
 =======================================================
 
-Plays AutoPiano scripts (.apno files) on Roblox pianos by pressing the keys for you.
-It only plays scripts; turning songs into scripts needs the full AutoPiano app.
+Plays LegatoEngine scripts (.apno files) on Roblox pianos by pressing the keys for you.
+It only plays scripts; turning songs into scripts needs the full LegatoEngine app.
 
 Installing
 1. Unzip this folder somewhere you'll keep it, such as Documents.
-2. Double-click "AutoPiano Player.exe".
+2. Double-click "LegatoPlayer.exe".
    If Windows says "Windows protected your PC", click "More info", then "Run anyway".
    (The exe isn't signed, so Windows asks once.) Some antivirus apps are wary of
    programs that press keys; allow it if you trust where you got it.
 
 Your scripts
-Put .apno files in Music\AutoPiano (folders inside it are fine; "Show folder" opens it),
+Put .apno files in Music\LegatoEngine (folders inside it are fine; "Show folder" opens it),
 choose another folder with "Change folder...", or drop a script on the window.
 
 Playing

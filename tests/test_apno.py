@@ -1,7 +1,7 @@
 import pytest
 
-from autopiano.format.apno import ApnoError, dumps, loads, read_script, script_to_payload, seal, write_script
-from autopiano.models import Modifier, Note, Role, Script, ScriptMeta
+from legatoengine.format.apno import ApnoError, dumps, loads, read_script, script_to_payload, seal, write_script
+from legatoengine.models import Modifier, Note, Role, Script, ScriptMeta
 
 
 def make_script() -> Script:
@@ -63,7 +63,7 @@ def test_truncated_file_is_rejected():
 
 
 def test_other_files_are_rejected():
-    with pytest.raises(ApnoError, match="not an AutoPiano script"):
+    with pytest.raises(ApnoError, match="not a LegatoEngine script"):
         loads(b"MThd\x00\x00\x00\x06")
 
 

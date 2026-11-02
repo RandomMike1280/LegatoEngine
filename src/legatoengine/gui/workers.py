@@ -23,8 +23,8 @@ def _convert_main(path: str, kind: str, out) -> None:
     os.environ.setdefault("MPLBACKEND", "Agg")
     warnings.simplefilter("ignore")
     try:
-        from autopiano.ingest.convert import load_song
-        from autopiano.ingest.download import download, is_link
+        from legatoengine.ingest.convert import load_song
+        from legatoengine.ingest.download import download, is_link
 
         def report(label: str, fraction: float, begin: float = 0.0, width: float = 1.0) -> None:
             out.put(("progress", label, begin + width * fraction))

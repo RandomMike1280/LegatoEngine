@@ -6,11 +6,11 @@ import numpy as np
 import pytest
 import soundfile
 
-from autopiano.arrange.pipeline import ArrangeSettings, arrange
-from autopiano.ingest import cache
-from autopiano.ingest.convert import load_song
-from autopiano.models import Note, Role
-from autopiano.synth import render
+from legatoengine.arrange.pipeline import ArrangeSettings, arrange
+from legatoengine.ingest import cache
+from legatoengine.ingest.convert import load_song
+from legatoengine.models import Note, Role
+from legatoengine.synth import render
 
 pytestmark = pytest.mark.slow
 SR = 44100
@@ -52,7 +52,7 @@ def test_full_song_path(tmp_path):
     assert song.beats and 60 < song.tempo < 200
     fractions = [f for _, f in stages]
     assert fractions == sorted(fractions) and fractions[-1] == 1.0
-    from autopiano.ingest import separate, transcribe_multi, transcribe_poly
+    from legatoengine.ingest import separate, transcribe_multi, transcribe_poly
 
     loaded = (separate._model, separate._mlx_weights, transcribe_multi._model, transcribe_poly._model)
     assert all(m is None for m in loaded)  # each model is freed once it's done, so they never add up
@@ -66,8 +66,8 @@ def test_full_song_path(tmp_path):
 
 
 def test_full_song_without_the_instrument_model(tmp_path, monkeypatch):
-    from autopiano.ingest import transcribe_multi
-    from autopiano.ingest.separate import ModelDownloadError
+    from legatoengine.ingest import transcribe_multi
+    from legatoengine.ingest.separate import ModelDownloadError
 
     def gated(progress=None):
         raise ModelDownloadError(transcribe_multi.GATED_HELP)

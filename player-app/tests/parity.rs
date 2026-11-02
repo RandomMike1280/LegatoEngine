@@ -36,7 +36,7 @@ fn matches_the_python_player() {
         if path.extension().is_none_or(|e| e != "apno") {
             continue;
         }
-        let script = autopiano_player::apno::read_script(&path).unwrap();
+        let script = legatoplayer::apno::read_script(&path).unwrap();
         let want: Value = serde_json::from_str(&std::fs::read_to_string(path.with_extension("json")).unwrap()).unwrap();
         let got = common::describe(&script);
         if let Some(difference) = first_difference("", &want, &got) {

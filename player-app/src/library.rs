@@ -3,7 +3,7 @@
 //! Searching forgives what people get wrong when they type a song's name: case, accents
 //! ("fur elise" finds "Für Elise"), punctuation, spacing ("bwv846" finds "BWV 846") and
 //! small typos ("moonlite" finds "Moonlight"). Every word of the search has to match.
-//! A port of `src/autopiano/library.py`.
+//! A port of `src/legatoengine/library.py`.
 
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -62,12 +62,27 @@ pub struct Entry {
     pub readable: bool,
 }
 
-/// The default library folder: Music/AutoPiano, the same one the converter saves to on a Mac.
+/// The default library folder: Music/LegatoEngine, the same one the converter saves to on a Mac.
 pub fn default_folder() -> PathBuf {
-    dirs::audio_dir()
-        .or_else(|| dirs::home_dir().map(|h| h.join("Music")))
-        .unwrap_or_else(|| PathBuf::from("."))
-        .join("AutoPiano")
+    music_folder().join("LegatoEngine")
+}
+
+/// The default library folder from before LegatoEngine was renamed: Music/AutoPiano.
+pub fn old_default_folder() -> PathBuf {
+    music_folder().join("AutoPiano")
+}
+
+fn music_folder() -> PathBuf {
+    dirs::audio_dir().or_else(|| dirs::home_dir().map(|h| h.join("Music"))).unwrap_or_else(|| PathBuf::from("."))
+}
+
+/// Where `path`, saved inside the folder `old`, is now that `old` has moved to `new`.
+/// None if it wasn't in `old`, or `old` is still there.
+pub fn moved_path(path: &Path, old: &Path, new: &Path) -> Option<PathBuf> {
+    if old.exists() {
+        return None;
+    }
+    path.strip_prefix(old).ok().map(|rest| new.join(rest))
 }
 
 /// The words of `text` as the search compares them: lower case, without accents or punctuation.
@@ -428,5 +443,16 @@ mod tests {
     fn names_sort_like_counting() {
         let sorted = sort_entries(vec![entry("Idea 10", "", ""), entry("Idea 9", "", "")], Sort::Name);
         assert_eq!(sorted[0].title, "Idea 9");
+    }
+
+    #[test]
+    fn saved_paths_follow_the_renamed_folder() {
+        let (old, new) = (Path::new("/nowhere/Music/AutoPiano"), Path::new("/nowhere/Music/LegatoEngine"));
+        let script = old.join("Classical/Song.apno");
+        assert_eq!(moved_path(&script, old, new), Some(new.join("Classical/Song.apno")));
+        assert_eq!(moved_path(old, old, new), Some(new.to_path_buf()));
+        assert_eq!(moved_path(Path::new("/elsewhere/Song.apno"), old, new), None);
+        let here = std::env::temp_dir(); // a folder that's still there keeps its paths
+        assert_eq!(moved_path(&here.join("Song.apno"), &here, new), None);
     }
 }

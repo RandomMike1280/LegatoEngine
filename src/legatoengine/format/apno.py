@@ -13,7 +13,7 @@ A file is a 40-byte header followed by a sealed payload:
 The header is authenticated as associated data, so changing any byte of the file
 makes it unreadable instead of silently wrong.
 
-The key is derived from a secret built into AutoPiano. That keeps scripts unreadable
+The key is derived from a secret built into LegatoEngine. That keeps scripts unreadable
 to other programs, but it is obfuscation rather than real DRM: someone who takes the
 program apart can recover the secret.
 """
@@ -49,6 +49,7 @@ class ApnoError(Exception):
 
 def _key(salt: bytes, magic: bytes) -> bytes:
     secret = bytes(a ^ b for a, b in zip(_A, _B))
+    # "autopiano" is LegatoEngine's first name; it stays here so scripts made before the rename still open
     hkdf = HKDF(algorithm=hashes.SHA256(), length=32, salt=salt, info=b"autopiano/" + magic)
     return hkdf.derive(secret)
 
@@ -62,10 +63,10 @@ def seal(payload: dict, magic: bytes = MAGIC, version: int = FORMAT_VERSION) -> 
 
 def unseal(data: bytes, magic: bytes = MAGIC, max_version: int = FORMAT_VERSION) -> dict:
     if len(data) < HEADER.size or data[:4] != magic:
-        raise ApnoError("This is not an AutoPiano script.")
+        raise ApnoError("This is not a LegatoEngine script.")
     _, version, _, salt, nonce, length = HEADER.unpack_from(data)
     if version > max_version:
-        raise ApnoError(f"This script needs a newer AutoPiano (format v{version}).")
+        raise ApnoError(f"This script needs a newer LegatoEngine (format v{version}).")
     if version < 1:
         raise ApnoError("This script is damaged.")
     sealed = data[HEADER.size :]

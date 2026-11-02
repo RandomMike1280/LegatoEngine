@@ -380,7 +380,7 @@ class PlayerPanel(QWidget):
             self.load(Path(item.data(Qt.ItemDataRole.UserRole)))
 
     def _open_dialog(self) -> None:
-        path, _ = QFileDialog.getOpenFileName(self, "Open a script", str(LIBRARY_DIR), f"AutoPiano scripts (*{EXTENSION})")
+        path, _ = QFileDialog.getOpenFileName(self, "Open a script", str(LIBRARY_DIR), f"LegatoEngine scripts (*{EXTENSION})")
         if path:
             self.load(Path(path))
 
@@ -520,11 +520,11 @@ class PlayerPanel(QWidget):
     def _explain_permission(self) -> None:
         box = QMessageBox(self)
         box.setIcon(QMessageBox.Icon.Information)
-        box.setWindowTitle("Allow AutoPiano to press keys")
-        box.setText("To play in Roblox, AutoPiano needs the Accessibility permission.")
+        box.setWindowTitle("Allow LegatoEngine to press keys")
+        box.setText("To play in Roblox, LegatoEngine needs the Accessibility permission.")
         box.setInformativeText(
-            "In System Settings → Privacy & Security → Accessibility, turn on AutoPiano "
-            "(or the Terminal app, if you started AutoPiano from Terminal). Then press Play again.\n\n"
+            "In System Settings → Privacy & Security → Accessibility, turn on LegatoEngine "
+            "(or the Terminal app, if you started LegatoEngine from Terminal). Then press Play again.\n\n"
             "Want to try it first? Turn on Test mode."
         )
         settings_button = box.addButton("Open System Settings", QMessageBox.ButtonRole.AcceptRole)
@@ -587,7 +587,7 @@ class PlayerPanel(QWidget):
             if toggle.startswith("F") or stop.startswith("F"):
                 text += " On a MacBook keyboard, hold fn with the F-key."
         else:
-            text = "Ready. Hotkeys are off until AutoPiano has the Accessibility permission."
+            text = "Ready. Hotkeys are off until LegatoEngine has the Accessibility permission."
         self._show_status(text)
 
     def _show_status(self, text: str) -> None:
@@ -612,3 +612,5 @@ class PlayerPanel(QWidget):
     def shutdown(self) -> None:
         self.player.stop()
         self.hotkeys.stop()
+        self._watcher.directoryChanged.disconnect()
+        self._rescan.stop()

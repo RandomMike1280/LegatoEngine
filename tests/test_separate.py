@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 import torch
 
-from autopiano.ingest import separate
-from autopiano.ingest.separate import CHUNK, STEMS, ModelDownloadError
+from legatoengine.ingest import separate
+from legatoengine.ingest.separate import CHUNK, STEMS, ModelDownloadError
 
 
 class Scaler(torch.nn.Module):
@@ -105,7 +105,7 @@ def test_naming_a_pytorch_device_skips_mlx(fake_model, fake_mlx):
 
 def tiny_model():
     """BS-RoFormer with the real bands, heads and STFT but a narrow width, one layer and two stems."""
-    from autopiano.ingest.bs_roformer import BSRoformer
+    from legatoengine.ingest.bs_roformer import BSRoformer
 
     torch.manual_seed(0)
     model = BSRoformer(**{**separate.CONFIG, "dim": 32, "depth": 1, "num_stems": 2}).eval()
@@ -122,7 +122,7 @@ def sdr(ref, est):
 
 def test_the_mlx_port_matches_pytorch():
     mx = pytest.importorskip("mlx.core")
-    from autopiano.ingest import bs_roformer_mlx
+    from legatoengine.ingest import bs_roformer_mlx
 
     model = tiny_model()
     rng = np.random.default_rng(4)

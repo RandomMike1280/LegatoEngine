@@ -14,10 +14,10 @@ from PySide6.QtCore import Qt  # noqa: E402
 from PySide6.QtTest import QTest  # noqa: E402
 from PySide6.QtWidgets import QLineEdit, QPushButton, QVBoxLayout, QWidget  # noqa: E402
 
-from autopiano.gui import preview as preview_module  # noqa: E402
-from autopiano.gui.preview import ListenControls, ListenState, PreviewPlayer, SpaceListens  # noqa: E402
-from autopiano.models import Note  # noqa: E402
-from autopiano.synth import SAMPLE_RATE, render_felt  # noqa: E402
+from legatoengine.gui import preview as preview_module  # noqa: E402
+from legatoengine.gui.preview import ListenControls, ListenState, PreviewPlayer, SpaceListens  # noqa: E402
+from legatoengine.models import Note  # noqa: E402
+from legatoengine.synth import SAMPLE_RATE, render_felt  # noqa: E402
 
 SR = SAMPLE_RATE
 
@@ -74,7 +74,7 @@ def test_sustain_lets_notes_ring_on_until_their_key_is_struck_again():
     assert level(wet, 0.8, 1.6) > 10 * level(dry, 0.8, 1.6)  # long after the key was let go
     assert level(wet, 0.12, 0.28) == pytest.approx(level(dry, 0.12, 0.28), rel=0.2)  # held, it's the same note
 
-    from autopiano.synth import FELT_RING, _with_pedal
+    from legatoengine.synth import FELT_RING, _with_pedal
 
     notes = [Note(60, 0.0, 0.1, 90), Note(64, 0.5, 0.1, 90), Note(60, 1.0, 0.1, 90), Note(60, 1.0, 0.1, 70)]
     # struck again, the string that was ringing stops; the others ring as long as a felt piano can

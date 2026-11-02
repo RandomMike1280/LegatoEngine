@@ -1,22 +1,22 @@
-AutoPiano Player for Mac (Apple Silicon and Intel, macOS 10.15 or later)
+LegatoPlayer for Mac (Apple Silicon and Intel, macOS 10.15 or later)
 =========================================================================
 
-Plays AutoPiano scripts (.apno files) on Roblox pianos by pressing the keys for you.
-It only plays scripts; turning songs into scripts needs the full AutoPiano app.
+Plays LegatoEngine scripts (.apno files) on Roblox pianos by pressing the keys for you.
+It only plays scripts; turning songs into scripts needs the full LegatoEngine app.
 
 Installing
-1. Drag "AutoPiano Player" into your Applications folder.
+1. Drag "LegatoPlayer" into your Applications folder.
 2. Open it. If macOS says it can't check the app for malicious software, open
    System Settings > Privacy & Security, scroll down, and click "Open Anyway".
    (The app isn't notarized by Apple, so macOS asks once.)
 
 Letting it press keys
-The first time you press Play, macOS asks you to allow AutoPiano Player in
+The first time you press Play, macOS asks you to allow LegatoPlayer in
 System Settings > Privacy & Security > Accessibility. Turn it on, then press Play again.
 If an older copy was in that list, remove it with the minus button and add this one.
 
 Your scripts
-Put .apno files in Music > AutoPiano (folders inside it are fine; "Show folder" opens it),
+Put .apno files in Music > LegatoEngine (folders inside it are fine; "Show folder" opens it),
 choose another folder with "Change folder...", or drop a script on the window.
 
 Playing

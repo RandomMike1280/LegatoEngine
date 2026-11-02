@@ -458,26 +458,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
-name = "autopiano-player"
-version = "0.1.0"
-dependencies = [
- "aes-gcm",
- "deunicode",
- "dirs",
- "eframe",
- "egui_kittest",
- "flate2",
- "global-hotkey",
- "hkdf",
- "rfd",
- "rmpv",
- "serde",
- "serde_json",
- "sha2",
- "windows-sys 0.61.2",
-]
-
-[[package]]
 name = "bit-set"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2084,6 +2064,26 @@ name = "lazy_static"
 version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20870f649af7073d53e38067b2a84312175d56ea15217e1b15bc83506ec50afb"
+
+[[package]]
+name = "legatoplayer"
+version = "0.1.0"
+dependencies = [
+ "aes-gcm",
+ "deunicode",
+ "dirs",
+ "eframe",
+ "egui_kittest",
+ "flate2",
+ "global-hotkey",
+ "hkdf",
+ "rfd",
+ "rmpv",
+ "serde",
+ "serde_json",
+ "sha2",
+ "windows-sys 0.61.2",
+]
 
 [[package]]
 name = "libc"

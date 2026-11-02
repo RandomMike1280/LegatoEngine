@@ -1,7 +1,7 @@
 import pytest
 
-from autopiano.ingest.midi import TempoMap, read_midi
-from autopiano.models import Role
+from legatoengine.ingest.midi import TempoMap, read_midi
+from legatoengine.models import Role
 
 from .helpers import TPB, scale_song, write_midi
 

@@ -6,18 +6,18 @@ from pathlib import Path
 import pytest
 import torch
 
-from autopiano import cli, paths
-from autopiano.ingest import separate
-from autopiano.ingest.audio import install_hint
+from legatoengine import cli, paths
+from legatoengine.ingest import separate
+from legatoengine.ingest.audio import install_hint
 
 
 def test_folders():
     home = Path("/Users/me")
     assert paths._app_folders("darwin", home, {}) == (
-        home / "Library/Caches/AutoPiano",
-        home / "Library/Application Support/AutoPiano/models",
+        home / "Library/Caches/LegatoEngine",
+        home / "Library/Application Support/LegatoEngine/models",
     )
-    local = Path("/Users/me/AppData/Local/AutoPiano")
+    local = Path("/Users/me/AppData/Local/LegatoEngine")
     assert paths._app_folders("win32", home, {"LOCALAPPDATA": "/Users/me/AppData/Local"}) == (local / "Cache", local / "models")
     assert paths._app_folders("win32", home, {}) == (local / "Cache", local / "models")
 
@@ -46,14 +46,15 @@ def test_conversions_dont_restart(monkeypatch):
     monkeypatch.delenv("MallocLargeCache", raising=False)
     monkeypatch.setattr(cli.os, "execv", execv)
     monkeypatch.setattr(cli, "main", lambda: 0)
-    monkeypatch.setattr(sys, "argv", ["autopiano-cli", "convert", "song.mp3"])
+    monkeypatch.setattr(cli, "move_old_folders", lambda: [])
+    monkeypatch.setattr(sys, "argv", ["legatoengine-cli", "convert", "song.mp3"])
     assert cli.run() == 0
 
 
 def test_pressing_keys_says_where_to_play(monkeypatch, capsys):
     monkeypatch.setattr(sys, "platform", "win32")
     assert not cli._require_key_access()
-    assert "AutoPiano Player" in capsys.readouterr().err
+    assert "LegatoPlayer" in capsys.readouterr().err
 
 
 def test_install_hints(monkeypatch):
@@ -64,11 +65,11 @@ def test_install_hints(monkeypatch):
 
 
 def test_the_window_explains_itself(monkeypatch, capsys):
-    from autopiano.gui import app
+    from legatoengine.gui import app
 
     monkeypatch.setattr(sys, "platform", "win32")
     assert app.main() == 1
-    assert "autopiano-cli convert" in capsys.readouterr().err
+    assert "legatoengine-cli convert" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize("output", ["out/", f"out{cli.os.sep}"])

@@ -1,6 +1,6 @@
 //! Keyboard-possible mode: every chord sticks to one modifier, the way a real keyboard has to be played.
 //!
-//! A port of `src/autopiano/arrange/possible.py` (and the `enforce_key_gaps` it ends with); see
+//! A port of `src/legatoengine/arrange/possible.py` (and the `enforce_key_gaps` it ends with); see
 //! there for the reasoning. Each chord keeps the melody's modifier, or else whichever keeps the
 //! most of the chord, and every other note is played an octave or two away, replaced by a nearby
 //! copy of a note already sounding, or left out.
