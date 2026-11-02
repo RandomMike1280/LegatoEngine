@@ -222,6 +222,22 @@ The packaged app needs its own Accessibility permission. An ad hoc signature cha
 
 Converting needs this Apple Silicon app or, on Windows, its [command line](#converting-on-windows), but playing finished scripts doesn't. [`player-app/`](player-app/README.md) is a small separate player for Windows and for any Mac, Apple Silicon or Intel. It has the Play tab's library, piano roll, hotkeys and options, presses exactly the same keys as the Play tab, and is about 15 MB. `player-app/packaging/build.sh` builds both downloads from this Mac.
 
+## Making a release
+
+```bash
+packaging/release.sh
+```
+
+This builds LegatoEngine.app and both LegatoPlayer downloads, then puts these in `release/`, which git ignores:
+
+| File | What it is |
+| --- | --- |
+| `LegatoEngine-mac.zip` | `LegatoEngine.app`, for Apple Silicon Macs |
+| `LegatoPlayer-mac.zip` | LegatoPlayer for Apple Silicon and Intel Macs |
+| `LegatoPlayer-windows.zip` | LegatoPlayer for 64-bit Windows |
+| `LegatoEngine-source.zip` | the source the apps were built from, uncommitted changes included, for building it yourself |
+| `SHA256SUMS.txt` | a SHA-256 checksum for each zip |
+
 ## The `.apno` format
 
 ```
